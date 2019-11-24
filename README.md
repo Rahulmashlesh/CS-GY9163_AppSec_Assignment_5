@@ -1,5 +1,6 @@
 # CS-GY9163_AppSec_Assignment_5
-CS-GY9163: Application Security Assignment 5 MobileSecurity
+CS-GY9163: Application Security 
+Assignment 5: MobileSecurity
 
 ## Introduction
 The goal of this assignment is to give you experience working with Android applications in a safe and secure way, as well as to understand the security and privacy implications of choices made during application development. However, due to time constraints we cannot spend enough time creating a full Android application. However, you should still gain experience with Android application. Therefore, in this assignment you are tasked with fixing an Android application that uses a spell checker Web service as a back end, and reducing the permissions to only what’s necessary. You will then return the fixed code and a write-up explaining what you changed in the code and why.
