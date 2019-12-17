@@ -25,7 +25,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends AppCompatActivity {
+//    private static final String SPELL_CHECK_URL = "http://10.0.2.2:8080/";
+//    private static final String KNOWN_HOST = "10.0.2.2";
+
     private static final String SPELL_CHECK_URL = "http://appsecclass.report:8080/";
     private static final String KNOWN_HOST = "appsecclass.report";
 
@@ -45,42 +48,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         }
     }
 
-    /* Get location data to provide language localization
-    *  Supported languages ar-DZ zh-CN en-US en-IN en-AU fr-FR
-    */
-    @Override
-    public void onLocationChanged(Location location) {
-        URL url = null;
-        try {
-            url = new URL(SPELL_CHECK_URL + "metrics"
-                    +"?lat="
-                    +location.getLatitude()+"&long=" + location.getLongitude()
-            );
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        HttpURLConnection urlConnection = null;
-        try {
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.disconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /* Necessary to implement the LocationListener interface
-    */
-    @Override
-    public void onStatusChanged(String s, int i, Bundle bundle) {}
-
-    @Override
-    public void onProviderEnabled(String s) {}
-
-    @Override
-    public void onProviderDisabled(String s) {}
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,17 +57,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         view.setWebViewClient(new MyWebViewClient());
 
         WebSettings settings = view.getSettings();
-        settings.setAllowFileAccessFromFileURLs(true);
-        settings.setJavaScriptEnabled(true);
-        settings.setAllowUniversalAccessFromFileURLs(true);
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (!(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        }
+        //settings.setAllowFileAccessFromFileURLs(true);
+
+        settings.setJavaScriptEnabled(true);
+
+        //settings.setAllowUniversalAccessFromFileURLs(true);
 
         setContentView(view);
-        view.loadUrl(SPELL_CHECK_URL + "register");
+        view.loadUrl(SPELL_CHECK_URL + "login");
     }
 }
